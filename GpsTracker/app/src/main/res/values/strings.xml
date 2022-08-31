@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GpsTracker</string>
+    <string name="alertTitle">Distance</string>
+    <string name="alertButton">Set</string>
+</resources>
