@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FileCreateCopy</string>
+    <string name="Ready">Ready</string>
+    <string name="Asked">Asked</string>
+</resources>
