@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Accessibility example</string>
+    <string name="accessibility_service_label">Be Codey Service</string>
+    <string name="accessibility_service_description">my description</string>
+</resources>
