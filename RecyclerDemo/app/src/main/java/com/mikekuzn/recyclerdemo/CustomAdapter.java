@@ -8,10 +8,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
-    String[] itemText;
+import java.util.List;
 
-    public CustomAdapter(String[] itemText) {
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
+    List<String> itemText;
+
+    public CustomAdapter(List<String> itemText) {
         this.itemText = itemText;
     }
 
@@ -25,12 +27,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.getTextView().setText(itemText[position]);
+        holder.getTextView().setText(itemText.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return itemText.length;
+        return itemText.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
