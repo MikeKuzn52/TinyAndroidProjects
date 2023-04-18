@@ -45,8 +45,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickDelItem(View view) {
         startEndItem = !startEndItem;
-        itemsList.remove(startEndItem ? 0 : itemsList.size()-1);
-        adapter.notifyDataSetChanged();
+        if (itemsList.size() != 0) {
+            itemsList.remove(startEndItem ? 0 : itemsList.size() - 1);
+            adapter.notifyDataSetChanged();
+        }
     }
     public void clickSet10Items(View view) {
         setItems(10);

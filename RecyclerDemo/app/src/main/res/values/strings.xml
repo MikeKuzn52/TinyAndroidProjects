@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RecyclerDemo</string>
+    <string name="app_name">RecyclerAdaptationDemo</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="AddItem">Add new Item</string>
