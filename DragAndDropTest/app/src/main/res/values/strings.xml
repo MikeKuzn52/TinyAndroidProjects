@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DragAndDropTest</string>
+    <string name="btn_text">Draggable button</string>
+    <string name="tv_text">Draggable text</string>
+</resources>
