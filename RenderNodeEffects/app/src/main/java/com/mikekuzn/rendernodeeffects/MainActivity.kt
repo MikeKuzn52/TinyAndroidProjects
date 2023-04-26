@@ -29,21 +29,23 @@ class MainActivity : AppCompatActivity(), Runnable {
 
         binding.bluer.Seek.setOnSeekBarChangeListener(
             SeekBarListener(
-                seekBarListenerList,
                 this,
                 binding.bluer.Seek,
                 binding.bluer.SeekText,
                 ApplyBluerEffect()
-            )
+            ).also {
+                seekBarListenerList.add(it)
+            }
         )
         binding.brightness.Seek.setOnSeekBarChangeListener(
             SeekBarListener(
-                seekBarListenerList,
                 this,
                 binding.brightness.Seek,
                 binding.brightness.SeekText,
                 ApplyBrightnessEffect()
-            )
+            ).also {
+                seekBarListenerList.add(it)
+            }
         )
 
         var imageList = arrayOf(
@@ -57,7 +59,6 @@ class MainActivity : AppCompatActivity(), Runnable {
 
 
     class SeekBarListener constructor(
-        private var list: ArrayList<SeekBarListener>,
         private val runnable: Runnable,
         seekBar: SeekBar,
         textView: TextView,
@@ -68,7 +69,6 @@ class MainActivity : AppCompatActivity(), Runnable {
             textView.text = effect.name
             seekBar.max = effect.maxVal
             seekBar.progress = effect.startVal
-            list.add(this)
         }
         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
             renderEffect = effect.invoke(progress.toFloat())
