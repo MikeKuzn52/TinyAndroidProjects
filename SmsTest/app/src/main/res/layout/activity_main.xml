@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,36 +10,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Get permission"
-        android:onClick="getPermission"
-        tools:ignore="HardcodedText,TextViewEdits" />
+        android:text="@string/get_permission"
+        android:onClick="getPermission"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="Phone number"
-        android:text="+7"
+        android:hint="@string/phone_number_hint"
+        android:text="@string/phone_number"
         android:inputType="phone"
-        android:id="@+id/phone"
-        tools:ignore="HardcodedText,TextViewEdits" />
+        android:id="@+id/phone"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_margin="10dp"
-        android:hint="SMS text"
-        android:text="Message from the sms transmitter test application"
+        android:hint="@string/sms_text_hint"
+        android:text="@string/sms_text_example"
         android:inputType="textShortMessage"
-        android:id="@+id/sms"
-        tools:ignore="HardcodedText,TextViewEdits" />
+        android:id="@+id/sms"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Send message"
+        android:text="@string/send_message"
         android:enabled="false"
-        android:id="@+id/send"
-        tools:ignore="HardcodedText,TextViewEdits" />
+        android:id="@+id/send"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/send_message_by_intent"
+        android:enabled="false"
+        android:id="@+id/sendByIntent"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        android:inputType="textShortMessage"
+        android:id="@+id/smsReceive"/>
 </LinearLayout>

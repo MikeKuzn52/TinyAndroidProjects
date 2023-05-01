@@ -10,10 +10,10 @@ import android.widget.Toast;
 public class Permission {
     private boolean firstAsk = false;
     public static final int PERMISSION_REQUEST_CODE = 0x3296;
-    private Activity activity;
-    private String permissions;
+    private final Activity activity;
+    private final String[] permissions;
 
-    public Permission(Activity activity, String permissions) {
+    public Permission(Activity activity, String[] permissions) {
         Log.i("MikeKuzn", "Permission Constructor");
         this.activity = activity;
         this.permissions = permissions;
@@ -32,13 +32,16 @@ public class Permission {
         return false;
     }
     public boolean checkPermission() {
-        boolean res = ContextCompat.checkSelfPermission(activity, permissions) == PackageManager.PERMISSION_GRANTED;
-        Log.i("MikeKuzn", "Permissions " + permissions + " = " + res);
+        boolean res = true;
+        for (String curPer : permissions) {
+            res &= ContextCompat.checkSelfPermission(activity, curPer) == PackageManager.PERMISSION_GRANTED;
+            Log.i("MikeKuzn", "Permissions " + permissions + " = " + res);
+        }
         return res;
     }
 
     private void returnPermission() {
-        ActivityCompat.requestPermissions(activity, new String[]{permissions}, PERMISSION_REQUEST_CODE);
+        ActivityCompat.requestPermissions(activity, permissions, PERMISSION_REQUEST_CODE);
     }
 
     @Override

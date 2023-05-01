@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">SmsTest</string>
+    <string name="send_message">Send message</string>
+    <string name="send_message_by_intent">Send message using Intent</string>
+    <string name="get_permission">Get permission</string>
+    <string name="sms_text_hint">SMS text</string>
+    <string name="sms_text_example">Message from the sms transmitter test application</string>
+    <string name="phone_number">+7</string>
+    <string name="phone_number_hint">Phone number</string>
 </resources>
