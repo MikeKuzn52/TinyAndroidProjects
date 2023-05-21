@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ShareDataTransmitter</string>
+    <string name="share_as_message">Share as message</string>
+    <string name="share_for_receiver">Share for custom receiver</string>
+</resources>
