@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var bigIcon: ImageView
     private var smallIcon: ImageView? = null
-    var count:Int = 0
+    private var count:Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,24 +23,33 @@ class MainActivity : AppCompatActivity() {
        bigIcon = findViewById(R.id.bigIcon)
         smallIcon = findViewById(R.id.smallIcon)
 
-        var animRotateIn_icon: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate)
+        val animRotateIn_icon: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate)
         smallIcon?.startAnimation(animRotateIn_icon);
     }
 
     override fun onResume() {
         super.onResume()
-        var animRotateIn_big: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate)
-        bigIcon?.startAnimation(animRotateIn_big)
+        val animRotateIn_big: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate)
+        bigIcon.startAnimation(animRotateIn_big)
+        count = 0
     }
 
     fun button1(view: View) {
-        var secondIntent: Intent = Intent(this, SecontdainActivity::class.java)
+        val secondIntent: Intent = Intent(this, SecondActivity::class.java)
         startActivity(secondIntent)
         overridePendingTransition(R.anim.diagonaltranslate,R.anim.alpha)
     }
 
+    fun button2(view: View) {
+        startActivity(Intent(this, ThirdActivity::class.java))
+    }
+
+    fun button3(view: View) {
+        startActivity(Intent(this, FourthActivity::class.java))
+    }
+
     override fun onUserLeaveHint() {
-        Toast.makeText(applicationContext, "Нажата кнопка HOME", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, "User Leave Hint", Toast.LENGTH_SHORT).show()
         super.onUserLeaveHint()
     }
 

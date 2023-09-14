@@ -3,4 +3,15 @@
     <string name="button1">Open second</string>
     <string name="title_activity_second">Second Activity</string>
     <string name="go_to_back">Go to Back</string>
+    <string name="title_activity_3">animateLayoutChanges=true</string>
+    <string name="title_activity_4">Activity4</string>
+    <string name="Button1Change">case 1</string>
+    <string name="Button2Change">case 2</string>
+    <string name="demo_text1">Demo Text 1</string>
+    <string name="demo_text2">Demo Text 2</string>
+    <string name="demo_text3">Demo Text 3</string>
+    <string name="button2">Open third (animateLayoutChanges)</string>
+    <string name="button3">Open fourth (Value and Object)</string>
+    <string name="value_animator">Value animator</string>
+    <string name="object_animator">Object animator</string>
 </resources>
