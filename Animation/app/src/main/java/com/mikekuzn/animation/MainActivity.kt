@@ -2,29 +2,48 @@ package com.mikekuzn.animation
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Choreographer
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.math.roundToInt
 
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var fpsTxt: TextView
     private lateinit var bigIcon: ImageView
     private var smallIcon: ImageView? = null
     private var count:Int = 0
-
+    private var fps:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-       bigIcon = findViewById(R.id.bigIcon)
+        bigIcon = findViewById(R.id.bigIcon)
         smallIcon = findViewById(R.id.smallIcon)
+        fpsTxt = findViewById(R.id.fps)
 
         val animRotateIn_icon: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate)
         smallIcon?.startAnimation(animRotateIn_icon);
+
+        Choreographer.getInstance().postFrameCallback(object : Choreographer.FrameCallback {
+            private var lastFrameTime: Long = 0
+            override fun doFrame(frameTimeNanos: Long) {
+                val frameLength = frameTimeNanos - lastFrameTime
+                val fps_ = (600000000.0 / frameLength).roundToInt()
+                if (fps != fps_) {
+                    fps = fps_
+                    fpsTxt.text = "fps=$fps"
+                }
+                lastFrameTime = frameTimeNanos
+                Choreographer.getInstance().postFrameCallback(this)
+            }
+        })
     }
 
     override fun onResume() {
