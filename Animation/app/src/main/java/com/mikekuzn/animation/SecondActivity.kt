@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 
-
 class SecondActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

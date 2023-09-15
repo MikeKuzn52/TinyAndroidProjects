@@ -42,6 +42,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import otus.homework.composemodule.ui.theme.AnimationTheme
 import kotlin.math.roundToInt
 
@@ -68,7 +72,6 @@ fun Greeting() {
         var imageVisible by remember { mutableStateOf(true) }
         Button(onClick = {
             imageVisible = !imageVisible
-            Log.d("***[", "visible=$imageVisible")
         }, Modifier.fillMaxWidth()) {
             Text(text = "Animation 1")
         }
@@ -110,7 +113,7 @@ fun Greeting() {
             modifier = Modifier
                 .clickable { trigger += 1 }
                 .offset { IntOffset(shake.value.roundToInt(), y = 0) }
-                .rotate(- shake.value / 8)
+                .rotate(-shake.value / 8)
                 .padding(20.dp)
         ) {
             Text(
@@ -125,6 +128,20 @@ fun Greeting() {
                 textAlign = TextAlign.Center,
             )
         }
+
+        val lottie by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.android))
+        var isPlaying by remember{ mutableStateOf(true) }
+        val progress by animateLottieCompositionAsState(
+            composition = lottie,
+            isPlaying = isPlaying
+        )
+        Button(onClick = {
+            isPlaying = !isPlaying
+        }, Modifier.fillMaxWidth()) {
+            Text(text = "Start / stop")
+        }
+
+        LottieAnimation(composition = lottie, progress = progress)
     }
 }
 

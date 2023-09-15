@@ -5,20 +5,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SecondActivity">
 
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/go_to_back"
-        tools:ignore="MissingConstraints" />
+        android:text="@string/go_to_back"/>
 
-    <EditText
-        android:id="@+id/text"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/android"
+        app:lottie_loop="true"
+        app:lottie_speed="1" />
 
 </LinearLayout>
