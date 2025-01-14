@@ -12,7 +12,7 @@ data class TestObject(
     override fun toString() = par
 }
 
-class TestClass(
+class TestSuspendClass(
     private val dispatcher: CoroutineDispatcher = Dispatchers.Default
 ) {
     private val coroutineScope by lazy { CoroutineScope(dispatcher) }

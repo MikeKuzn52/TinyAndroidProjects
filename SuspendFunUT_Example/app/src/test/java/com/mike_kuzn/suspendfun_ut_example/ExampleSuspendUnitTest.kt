@@ -1,5 +1,6 @@
 package com.mike_kuzn.suspendfun_ut_example
 
+import android.util.Log
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -8,14 +9,14 @@ import org.junit.Assert.*
 
 class ExampleSuspendUnitTest {
 
-    val testString = "TestString"
-    val expectedString = "TestString_End"
+    private val testString = "TestString"
+    private val expectedString = "TestString_End"
     private val testDispatcher = StandardTestDispatcher()
 
     @Test
     fun `Incorrect coroutine test`() = runTest() {
         val testObject = TestObject(testString)
-        val testClass = TestClass()
+        val testClass = TestSuspendClass()
         // Сложность в том что testFun не suspend, а она запускает suspend функцию и как дождаться ее результата
         testClass.testFun(testObject)
         //assertEquals(expectedString, testObject.toString()) - Error т.к. testFun->sFun ещё не отработала
@@ -29,7 +30,7 @@ class ExampleSuspendUnitTest {
         // runTest в отличии от runBlocking так же позволяет не ждать delay("много"),
         //   т.е. работать с виртуальным временем и даже управлять этим временем
         val testObject = TestObject(testString)
-        val testClass = TestClass(testDispatcher)
+        val testClass = TestSuspendClass(testDispatcher)
         testClass.testFun(testObject)
         // Дождаться завершения всех job-ов.
         // Это позволит дождаться выполнения testClass.testFun->sFun и получить результат ее работы

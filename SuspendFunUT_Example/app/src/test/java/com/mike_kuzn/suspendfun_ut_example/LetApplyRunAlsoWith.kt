@@ -1,5 +1,11 @@
 package com.mike_kuzn.suspendfun_ut_example
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -23,6 +29,22 @@ class LetApplyRunAlsoWith {
     // более того если в паралельном потоке поменяли то на чем вызвали оператор, it останется
     // (но с дата классом нужено учитывать что останетсяя ссылка на то на чем вызвали оператор,
     // а сами данные в дата классе меняется и тут и в параллельном потоке)
+    @Test
+    fun changeIt() = runBlocking {
+        data class T(var value: Int)
+        var endVal = -1
+        val t = T(0)
+        val scope = CoroutineScope(Dispatchers.Unconfined)
+        val job: Deferred<Unit> = t.let{
+            scope.async{
+                delay(10)
+                endVal = it.value
+            }
+        }
+        t.value = 1
+        job.await()
+        assertEquals(1, endVal)
+    }
 
     @Test
     fun let() {
