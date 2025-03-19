@@ -22,6 +22,10 @@ const val TAG = "LooperHandlerTag"
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val def = Thread.getDefaultUncaughtExceptionHandler()
+        if (def !is CustomExceptionHandler) {
+            Thread.setDefaultUncaughtExceptionHandler(CustomExceptionHandler(def))
+        }
         setContent {
             LooperHandlerTestTheme {
                 // A surface container using the 'background' color from the theme
@@ -34,6 +38,27 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    private class CustomExceptionHandler(val def: Thread.UncaughtExceptionHandler) :
+        Thread.UncaughtExceptionHandler {
+        override fun uncaughtException(t: Thread, e: Throwable) {
+            Log.d(TAG, "Exception $e")
+            if (e is CustomException) {
+                Log.d(TAG, "Ignore CustomException $e")
+                Log.d(TAG, "getStackTraceString ${Log.getStackTraceString(e)}")
+            } else {
+                Log.d(TAG, "Exception $e")
+                def.uncaughtException(t, e)
+            }
+        }
+
+    }
+}
+
+private class CustomException : Exception()
+
+fun throwCustomException() {
+    throw CustomException()
 }
 
 @Composable
@@ -50,14 +75,14 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             Text("MainLooper.loop()", fontSize = 25.sp)
         }
         Button(onClick = {
-            Looper.getMainLooper().setMessageLogging{
+            Looper.getMainLooper().setMessageLogging {
                 Log.d(TAG, "Test $it")
             }
         }) {
             Text("Subscribe on looper", fontSize = 25.sp)
         }
         Button(onClick = {
-            Looper.myQueue().addIdleHandler{
+            Looper.myQueue().addIdleHandler {
                 Log.d(TAG, "idling")
                 // to repeat run this function: return false
                 // to stop running this function: return true
@@ -65,6 +90,12 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             }
         }) {
             Text("Subscribe on looper idling", fontSize = 25.sp)
+        }
+        Button(onClick = { throwCustomException() }) {
+            Text("CustomException -> Ignore", fontSize = 25.sp)
+        }
+        Button(onClick = { throw Exception() }) {
+            Text("Exception -> Crash", fontSize = 25.sp)
         }
     }
 }

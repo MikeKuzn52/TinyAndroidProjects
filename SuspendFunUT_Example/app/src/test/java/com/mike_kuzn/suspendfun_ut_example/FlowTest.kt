@@ -5,6 +5,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.advanceTimeBy
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -22,7 +23,7 @@ class FlowTest {
         val fakeRepository = FakeRepository()
         val flowClass = TestFlowClass(fakeRepository, Dispatchers.Unconfined)
         flowClass.initialize()
-        advanceTimeBy(600)
+        advanceUntilIdle()//advanceTimeBy(600)
         //Если job публична и ее можно вытащить из тестируемого кода,
         // то желательно закрыть эту job: .cancelAndJoin()
         assertEquals(69, flowClass.currentValue)
@@ -36,7 +37,7 @@ class FlowTest {
         val fakeRepository = FakeRepository()
         val flowClass = TestFlowClass(fakeRepository, Dispatchers.Unconfined)
         flowClass.initialize()
-        advanceTimeBy(600)
+        advanceUntilIdle()//advanceTimeBy(600)
         assertEquals(null, flowClass.currentValue)
         fakeRepository.value.emit(5)
         assertEquals(5, flowClass.currentValue)

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HiltTest</string>
+    <string name="description"><![CDATA[Цель этой части приложения: отработка баги с евентами при подключении/отключении внешней клавиатуры. Суть проблемы в том, что происходит перерисовка ViewRootImpl::handleResized->forceLayout]]></string>
 </resources>
